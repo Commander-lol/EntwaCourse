@@ -16,6 +16,13 @@
             h1, h2, h3, h4, h5, h6 {
                 font-family: 'Roboto Slab', serif;
             }
+            strong {
+                font-weight: 700;
+            }
+            em {
+                font-weight: 300;
+                font-style: italic;
+            }
             li {
                 margin-top: 0.5rem;
                 margin-bottom: 0.5rem;
@@ -41,13 +48,6 @@
                 color: dodgerblue;
                 position: relative;
                 text-decoration: none;
-            }
-            strong {
-                font-weight: 700;
-            }
-            em {
-                font-weight: 300;
-                font-style: italic;
             }
             a[href]:before {
                 content: "";
@@ -91,9 +91,9 @@
             <section>
                 <h2>Contents</h2>
                 <ol>
-                    <li><a href="#Introduction">Introduction</a>
+                    <li>Introduction
                         <ol>
-                            <li><a href="#Introduction-Aim">Aim</a></li>
+                            <li>Aim</li>
                             <li>Key Personnel</li>
                             <li>Future Proofing</li>
                             <li>Rationale for Development</li>
@@ -115,11 +115,12 @@
                             <li>Accepted Stage</li>
                         </ol>
                     </li>
-                    <li>Document Control
+                    <li><a href="#DocumentControl">Document Control</a>
                         <ol>
-                            <li>Style Guide</li>
-                            <li>Maintenance Procedure</li>
+                            <li><a href="#DocumentControl-Style">Style Guide</a></li>
+                            <li><a href="#DocumentControl-Maintenance">Maintenance Procedure</a></li>
                             <li>Diff List</li>
+                            <li>Status Update List</li>
                         </ol>
                     </li>
                 </ol>
@@ -167,7 +168,7 @@
             <section>
                 <h2><a id="DocumentControl">5.</a> Document Control</h2>
                 <section>
-                    <h3><a id="DocumentControl-Maintenance">5.1.</a> Style Guide</h3>
+                    <h3><a id="DocumentControl-Style">5.1.</a> Style Guide</h3>
                     <p>
                         This document is structured specifically to enable easy machine extraction of arbitrary sections.
                         As such, strict adherance to this brief style guide is critical to enable future versions are
