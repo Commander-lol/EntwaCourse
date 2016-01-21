@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>SUMs Requirement Spec</title>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300italic|Roboto+Slab:400,700|Cousine);
+            body {
+                font-family: 'Open Sans', sans-serif;
+            }
+            main {
+                position: relative;
+                width: 90%;
+                margin: auto;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'Roboto Slab', serif;
+            }
+            li {
+                margin-top: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+            ol {
+                counter-reset: item;
+            }
+            ol li {
+                display: block;
+            }
+            ol li:before {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                content: counters(item, ".") ". ";
+                counter-increment: item;
+            }
+            ul {
+                list-style: square;
+            }
+            a[href] {
+                color: dodgerblue;
+                position: relative;
+                text-decoration: none;
+            }
+            strong {
+                font-weight: 700;
+            }
+            em {
+                font-weight: 300;
+                font-style: italic;
+            }
+            a[href]:before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 1px;
+                bottom: 0;
+                left: 0;
+                background-color: dodgerblue;
+                visibility: hidden;
+                -webkit-transition: all 0.3s ease-in-out 0s;
+                transition: all 0.3s ease-in-out 0s;
+                -webkit-transform: scaleX(0);
+                transform: scaleX(0);
+            }
+            a[href]:visited {
+                color: firebrick;
+            }
+            a[href]:hover:before {
+                visibility: visible;
+                -webkit-transform: scaleX(1);
+                transform: scaleX(1);
+            }
+            a[href]:visited:before {
+                background-color: firebrick;
+            }
+            code {
+                background-color: aliceblue;
+                font-family: 'Cousine', monospace;
+            }
+            .warning {
+                color: red;
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <main>
+            <h1>SUMS - Something Using Many Syllables</h1>
+            <section>
+                <h2>Contents</h2>
+                <ol>
+                    <li><a href="#Introduction">Introduction</a>
+                        <ol>
+                            <li><a href="#Introduction-Aim">Aim</a></li>
+                            <li>Key Personnel</li>
+                            <li>Future Proofing</li>
+                            <li>Rationale for Development</li>
+                            <li>Interactions and Dependencies</li>
+                            <li>Timetable</li>
+                        </ol>
+                    </li>
+                    <li>Data Requirements
+                        <ol>
+                            <li>Externally Sourced Data</li>
+                            <li>Internally Sourced Data</li>
+                            <li>General</li>
+                        </ol>
+                    </li>
+                    <li>Sign Up System</li>
+                    <li>Idea Management
+                        <ol>
+                            <li>Proposal Stage</li>
+                            <li>Accepted Stage</li>
+                        </ol>
+                    </li>
+                    <li>Document Control
+                        <ol>
+                            <li>Style Guide</li>
+                            <li>Maintenance Procedure</li>
+                            <li>Diff List</li>
+                        </ol>
+                    </li>
+                </ol>
+            </section>
+        
+            <section>
+                <h2><a id="Introduction">1.</a> Introduction</h2>
+                <section>
+                    <h3><a id="Introduction-Aim">1.1.</a> Aim</h3>
+                </section>
+                <section>
+                    <h3><a id="Introduction-Personel">1.2.</a> Key Personel</h3>
+                </section>
+                <section>
+                    <h3><a id="Introduction-Future">1.3.</a> Future Proofing</h3>
+                </section>
+                <section>
+                    <h3><a id="Introduction-Rationale">1.4.</a> Rationale for Development</h3>
+                </section>
+                <section>
+                    <h3><a id="Introduction-Dependencies">1.5.</a> Interactions and Dependencies</h3>
+                </section>
+                <section>
+                    <h3><a id="Introduction-Timetable">1.6.</a> Timetable</h3>
+                </section>
+            </section>
+            
+            <section>
+                <h2><a id="DataRequirements">2.</a> Introduction</h2>
+                <section>
+                    <h3><a id="DataRequirements-External">2.1.</a> Externally Sourced Data</h3>
+                </section>
+                <section>
+                    <h3><a id="DataRequirements-Internal">2.2.</a> Internally Sourced Data</h3>
+                </section>
+                <section>
+                    <h3><a id="DataRequirements-General">2.3.</a> General Data</h3>
+                </section>
+            </section>
+            
+            <section>
+                <h2></h2>
+            </section>
+            
+            <section>
+                <h2><a id="DocumentControl">5.</a> Document Control</h2>
+                <section>
+                    <h3><a id="DocumentControl-Maintenance">5.1.</a> Style Guide</h3>
+                    <p>
+                        This document is structured specifically to enable easy machine extraction of arbitrary sections.
+                        As such, strict adherance to this brief style guide is critical to enable future versions are
+                        processed equally, as well as ensuring that the same processes performed on different versions
+                        of this document provide the same data (so long as the data is not the subject of a modification).
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Fonts:</strong> The document uses three fonts to denote varying content. <span class="warning">
+                            This item is a reference for reconstructing this document and should not be changed.</span>
+                            <ul>
+                                <li>
+                                    <strong>Heading</strong> content should be set in 700 weight Roboto Slab font or an alternative Serif 
+                                    font if Roboto Slab is unavailable.
+                                </li>
+                                <li>
+                                    <strong>Body</strong> content should be set in 400 weight Open Sans font, with bold elements using a weight
+                                    of 700 and italic elements using a weight of 300 in addition to italics hinting, or an alternative
+                                    Sans-Serif font if Open Sans is unavailable.
+                                </li>
+                                <li>
+                                    <strong>Code</strong> elements and elements that denote <strong>user input</strong> should be set in 400
+                                    weight Cousine font with an aliceblue (<code>#F0F8FF</code>) background at the same font size as surrounding content,
+                                    or with an alternative Monospace font if Cousine is unavailable.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Sections:</strong> Every numbered section (regardless of depth) should be entirely contained within one 
+                            <code>section</code> element within the <code>main</code> container element. The first child of
+                            each <code>section</code> should be an appropriate heading element, and may be followed by any valid content.
+                            <ul>
+                                <li>
+                                    <strong>Headings: </strong> An appropriate heading is a <code>h-</code> element where <code>-</code> is
+                                    a number from 2 to 6 denoting the depth of the section. Sections in the root of <code>main</code> are
+                                    indexed at 2, with this number being incremented once for every additional containing <code>section</code>.
+                                    The first content of the heading element must be an <code>a</code> anchor tag with an <code>id</code> that
+                                    is referenced by a corresponding anchor in the contents list. The anchor tag must only contain the associated
+                                    full section number as present in the contents page. The remaining contents can include any valid inline elements
+                                    (including raw text).
+                                </li>
+                                <li>
+                                    <strong>Contents: </strong>All items following the heading should be valid block level sectioning or content
+                                    elements (e.g. <code>div</code>, <code>p</code>, others). A numbered sectioning element <em>must not</em> contain
+                                    any inline elements such as <code>span</code> or <code>strong</code> - these should be within block level elements
+                                    so as to preserve semantic meaning and better enable machine interpretation by sensibly delimiting blocks of 
+                                    related content.
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><a id="DocumentControl-Maintenance">5.2.</a> Maintenance Procedure</h3>
+                    <p>
+                        Proposed revisions to this document must be created in a copy of this file seperate to the 'mainline' working copy. A Unix compliant
+                        diff file (standard output from the Unix diff utility) of the changes from the current mainline version must the be sent to the Design
+                        Authority alongside a written log of changes. Once accepted, the changes will be patched into the mainline version and subsequently
+                        added to the table of changes in section 5.3.
+                    </p>
+                    <p>
+                        The exception to this rule is the updating of milestone status markers. In order to update the status of a milestone, the implementer must
+                        send relevant proof of changed status in addition to a corroboration by all members of the Development Team to the Design Authority (where
+                        "relevant proof" is simply any relevant object that has sufficiently convinced the Development Team to give its unanimous approval for
+                        the status change). If the change is accepted, the status will be updated and a record will be added to section 5.4 alongside the <em>date
+                        of approval</em>. If appropriate the provided proof will be added as an appendix to this document.
+                    </p>
+                    <p>
+                        <strong>N.B:</strong> The addition of a diff file to section 5.3 is not considered a change that requires a published diff to be added to
+                        the table, as doing so would cause a recursive cascade. As a result, the diff will be added and that patched version will be
+                        considered the mainline version. If this procedure is followed correctly for subsequent changes, any changes to section 5.3 will not appear
+                        in any diff files.
+                    </p>
+                </section>
+            </section>
+        </main>
+    </body>
+</html>
