@@ -82,6 +82,30 @@
                 color: red;
             }
             
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                padding: 0;
+                margin: 0;
+            }
+            
+            table.table4 td, table.table4 th {
+                width: 25%;
+            }
+            table {
+                border: 2px #333 solid;
+            }
+            th, td {
+                border: 1px #333 solid;
+            }
+            tbody tr:nth-child(2n-1) {
+                background-color: antiquewhite;
+            }
+            td:not(.diff) {
+                text-align: center;
+            }
+            
+            
         </style>
     </head>
     
@@ -119,8 +143,8 @@
                         <ol>
                             <li><a href="#DocumentControl-Style">Style Guide</a></li>
                             <li><a href="#DocumentControl-Maintenance">Maintenance Procedure</a></li>
-                            <li>Diff List</li>
-                            <li>Status Update List</li>
+                            <li><a href="#DocumentControl-Changes">Diff List</a></li>
+                            <li><a href="#DocumentControl-Updates">Status Update List</a></li>
                         </ol>
                     </li>
                 </ol>
@@ -130,6 +154,12 @@
                 <h2><a id="Introduction">1.</a> Introduction</h2>
                 <section>
                     <h3><a id="Introduction-Aim">1.1.</a> Aim</h3>
+                    <p>
+                        Develop a service that allows MSc students to submit, manage and search project ideas. It should also allow
+                        unit lecturers to comment upon the submitted ideas, as well as become assigned to one or more projects. The
+                        core functionalities should closely resemble the <a href="http://www.sums.port.ac.uk/spi/" nofollow>existing
+                        system</a>
+                    </p>
                 </section>
                 <section>
                     <h3><a id="Introduction-Personel">1.2.</a> Key Personel</h3>
@@ -242,6 +272,66 @@
                         considered the mainline version. If this procedure is followed correctly for subsequent changes, any changes to section 5.3 will not appear
                         in any diff files.
                     </p>
+                </section>
+                <section>
+                    <h3><a id="DocumentControl-Changes">5.3.</a> Table of Changes</h3>
+                    <table class="table4">
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Date</th>
+                                <th>Changer</th>
+                                <th>Diff</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>v1.0</td>
+                                <td><time datetime="2016-01-21">2016-01-21</time></td>
+                                <td>Louis Capitanchik</td>
+                                <td class="diff"></td>
+                            </tr>
+                            <tr>
+                                <td>v1.0</td>
+                                <td><time datetime="2016-01-21">2016-01-21</time></td>
+                                <td>Louis Capitanchik</td>
+                                <td class="diff"></td>
+                            </tr>
+                            <tr>
+                                <td>v1.0</td>
+                                <td><time datetime="2016-01-21">2016-01-21</time></td>
+                                <td>Louis Capitanchik</td>
+                                <td class="diff"></td>
+                            </tr>
+                            <tr>
+                                <td>v1.0</td>
+                                <td><time datetime="2016-01-21">2016-01-21</time></td>
+                                <td>Louis Capitanchik</td>
+                                <td class="diff"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section>
+                    <h3><a id="DocumentControl-Updates">5.4.</a> List of Status Changes</h3>
+                    <table class="table4">
+                        <thead>
+                            <tr>
+                                <th>Milestone Identifier</th>
+                                <th>Date</th>
+                                <th>Changer</th>
+                                <th>New Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </section>
         </main>
