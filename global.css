@@ -77,9 +77,9 @@ td:not(.diff) {
     vertical-align: text-top;
 }
 .col3 .name {
-    width: 65%;
+    width: 80%;
 }
 .col3 .type, .col3 .status {
     text-align: center;
-    width: 10%;
+    width: 5%;
 }
