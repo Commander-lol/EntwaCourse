@@ -20,18 +20,18 @@
                     <li><a href="#Introduction">Introduction</a>
                         <ol>
                             <li><a href="#Introduction-Aim">Aim</a></li>
-                            <li><a href="#Intrpduction-Personel">Key Personnel</a></li>
-                            <li>Future Proofing</li>
-                            <li>Rationale for Development</li>
-                            <li>Interactions and Dependencies</li>
-                            <li>Timetable</li>
+                            <li><a href="#Introduction-Personel">Key Personnel</a></li>
+                            <li><a href="#Introduction-Future">Future Proofing</a></li>
+                            <li><a href="#Introduction-Rationale">Rationale for Development</a></li>
+                            <li><a href="#Introduction-Dependencies">Interactions and Dependencies</a></li>
+                            <li><a href="#Introduction-Timetable">Timetable</a></li>
                         </ol>
                     </li>
-                    <li>Data Requirements
+                    <li><a href="#DataRequirements">Data Requirements</a>
                         <ol>
-                            <li>Externally Sourced Data</li>
-                            <li>Internally Sourced Data</li>
-                            <li>General</li>
+                            <li><a href="#DataRequirements-External">Externally Sourced Data</a></li>
+                            <li><a href="#DataRequirements-Internal">Internally Sourced Data</a></li>
+                            <li><a href="#DataRequirements-General">General</a></li>
                         </ol>
                     </li>
                     <li>Sign Up System</li>
@@ -41,6 +41,7 @@
                             <li>Accepted Stage</li>
                         </ol>
                     </li>
+                    <li>Notification System</li>
                     <li><a href="#DocumentControl">Document Control</a>
                         <ol>
                             <li><a href="#DocumentControl-Style">Style Guide</a></li>
@@ -107,9 +108,27 @@
                 </section>
                 <section>
                     <h3><a id="Introduction-Dependencies">1.5.</a> Interactions and Dependencies</h3>
+                    <p>
+                        There is an existing database of project ideas; while utilisation of the database would introduce an
+                        unnecessary degree of implementation difficulty, the data format should be closely observed and preserved
+                        to allow for easy data migration.
+                    </p>
+                    <p>
+                        Student user accounts already exist in some capacity. Utilising the university login servers for the
+                        initial deadlines of the project would not be possible, this fact should be kept in mind when considering
+                        designs.
+                    </p>
                 </section>
                 <section>
                     <h3><a id="Introduction-Timetable">1.6.</a> Timetable</h3>
+                    <dl>
+                        <dt>Alpha Release (M1 Mandatory Requirements)</dt>
+                        <dd><time datetime="2016-03-04">March 4th 2016</time></dd>
+                        <dt>Initial Release (M2 Mandatory Requirements)</dt>
+                        <dd><time datetime="2016-03-04">March 14th 2016</time></dd>
+                        <dt>Future Release (F1 Optional Requirements)</dt>
+                        <dd>(TBA if shifted to mandatory release)</dd>
+                    </dl>
                 </section>
             </section>
             
@@ -117,23 +136,126 @@
                 <h2><a id="DataRequirements">2.</a> Data</h2>
                 <section>
                     <h3><a id="DataRequirements-External">2.1.</a> Externally Sourced Data</h3>
+                    <ol class="col3">
+                        <li>The system must be capable of holding information on:
+                            <ol>
+                                <li>
+                                    <span class="name">Students</span>
+                                    <span class="type">M1</span>
+                                    <span class="status"> </span>
+                                </li>
+                                <li>
+                                    <span class="name">Ideas</span>
+                                    <span class="type">M1</span>
+                                    <span class="status"> </span>
+                                </li>
+                                <li>
+                                    <span class="name">Staff</span>
+                                    <span class="type">M1</span>
+                                    <span class="status"> </span>
+                                </li>
+                                <li>
+                                    <span class="name">Organisations</span>
+                                    <span class="type">M1</span>
+                                    <span class="status"> </span>
+                                </li>
+                                <li>
+                                    <span class="name">Administrators</span>
+                                    <span class="type">M2</span>
+                                    <span class="status"> </span>
+                                </li>
+                            </ol>
+                        </li>
+
+                        <li>
+                            The system must maintain relationships between the above:
+                            <ol>
+                                <li>
+                                    <span class="name">What entity has submitted which idea</span>
+                                    <span class="type">M1</span>
+                                    <span class="status"> </span>
+                                </li>
+                                <li>
+                                    <span class="name">What staff has responded to which ideas</span>
+                                    <span class="type">M1</span>
+                                    <span class="status"> </span>
+                                </li>
+                                <li>
+                                    <span class="name">What staff has approved which ideas</span>
+                                    <span class="type">M1</span>
+                                    <span class="status"> </span>
+                                </li>
+                                <li>
+                                    <span class="name">Which ideas have originated from students</span>
+                                    <span class="type">M1</span>
+                                    <span class="status"> </span>
+                                </li>
+                                <li>
+                                    <span class="name">Which student submitted which idea (See previous)</span>
+                                    <span class="type">M2</span>
+                                    <span class="status"> </span>
+                                </li>
+
+                            </ol>
+                        </li>
+                    </ol>
                 </section>
                 <section>
                     <h3><a id="DataRequirements-Internal">2.2.</a> Internally Sourced Data</h3>
+                    <ol class="col3">
+                        <li>
+                            <span class="name">Create relationships that define whether or not an idea is submitted by an
+                            organisation or a student, for cases of accountability</span>
+                            <span class="type">M2</span>
+                            <span class="status"> </span>
+                        </li>
+                        <li>
+                            <span class="name">Create a per-user aggregate list of contact details to use in different notification
+                            circumstances</span>
+                            <span class="type">F1</span>
+                            <span class="status"> </span>
+                        </li>
+                    </ol>
                 </section>
                 <section>
-                    <h3><a id="DataRequirements-General">2.3.</a> General Data</h3>
+                    <h3><a id="DataRequirements-General">2.3.</a> General</h3>
+                    <ol class="col3">
+                        <li>
+                            <span class="name">Maintain a per-cohort (/year) user grouping and search</span>
+                            <span class="type">M2</span>
+                            <span class="status"> </span>
+                        </li>
+                        <li>
+                            <span class="name">Data should only be mutable by the authorised parties (listed in section 4)</span>
+                            <span class="type">M2</span>
+                            <span class="status"> </span>
+                        </li>
+                    </ol>
+                </section>
+            </section>
+
+            <section>
+                <h2><a id="SignUp">3.</a>Sign Up System</h2>
+            </section>
+
+            <section>
+                <h2><a id="Idea">4.</a>Idea Management</h2>
+                <section>
+                    <h3><a id="Idea-Proposed">4.1.</a> Proposed Ideas</h3>
+                </section>
+                <section>
+                    <h3><a id="Idea-Accepted">4.2.</a> Accepted Ideas</h3>
                 </section>
             </section>
             
             <section>
-                <h2></h2>
+                <h2><a id="Notify">5.</a>Notification System</h2>
             </section>
             
             <section>
-                <h2><a id="DocumentControl">5.</a> Document Control</h2>
+                <h2><a id="DocumentControl">6.</a> Document Control</h2>
                 <section>
-                    <h3><a id="DocumentControl-Style">5.1.</a> Style Guide</h3>
+                    <h3><a id="DocumentControl-Style">6.1.</a> Style Guide</h3>
                     <p>
                         This document is structured specifically to enable easy machine extraction of arbitrary sections.
                         As such, strict adherance to this brief style guide is critical to enable future versions are
@@ -197,7 +319,7 @@
                     </ul>
                 </section>
                 <section>
-                    <h3><a id="DocumentControl-Maintenance">5.2.</a> Maintenance Procedure</h3>
+                    <h3><a id="DocumentControl-Maintenance">6.2.</a> Maintenance Procedure</h3>
                     <p>
                         Proposed revisions to this document must be created in a copy of this file seperate to the 'mainline' working copy. A Unix compliant
                         diff file (standard output from the Unix diff utility) of the changes from the current mainline version must the be sent to the Design
@@ -219,7 +341,7 @@
                     </p>
                 </section>
                 <section>
-                    <h3><a id="DocumentControl-Changes">5.3.</a> Table of Changes</h3>
+                    <h3><a id="DocumentControl-Changes">6.3.</a> Table of Changes</h3>
                     <table class="table4">
                         <thead>
                             <tr>
@@ -236,29 +358,11 @@
                                 <td>Louis Capitanchik</td>
                                 <td class="diff"></td>
                             </tr>
-                            <tr>
-                                <td>v1.0</td>
-                                <td><time datetime="2016-01-21">2016-01-21</time></td>
-                                <td>Louis Capitanchik</td>
-                                <td class="diff"></td>
-                            </tr>
-                            <tr>
-                                <td>v1.0</td>
-                                <td><time datetime="2016-01-21">2016-01-21</time></td>
-                                <td>Louis Capitanchik</td>
-                                <td class="diff"></td>
-                            </tr>
-                            <tr>
-                                <td>v1.0</td>
-                                <td><time datetime="2016-01-21">2016-01-21</time></td>
-                                <td>Louis Capitanchik</td>
-                                <td class="diff"></td>
-                            </tr>
                         </tbody>
                     </table>
                 </section>
                 <section>
-                    <h3><a id="DocumentControl-Updates">5.4.</a> List of Status Changes</h3>
+                    <h3><a id="DocumentControl-Updates">6.4.</a> List of Status Changes</h3>
                     <table class="table4">
                         <thead>
                             <tr>

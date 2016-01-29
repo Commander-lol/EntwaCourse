@@ -67,3 +67,19 @@ tbody tr:nth-child(2n-1) {
 td:not(.diff) {
     text-align: center;
 }
+
+.col3 span {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    vertical-align: text-top;
+}
+.col3 .name {
+    width: 65%;
+}
+.col3 .type, .col3 .status {
+    text-align: center;
+    width: 10%;
+}
