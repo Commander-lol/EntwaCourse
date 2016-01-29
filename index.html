@@ -5,108 +5,10 @@
         <title>SUMs Requirement Spec</title>
         <style>
             @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300italic|Roboto+Slab:400,700|Cousine);
-            body {
-                font-family: 'Open Sans', sans-serif;
-            }
-            main {
-                position: relative;
-                width: 90%;
-                margin: auto;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                font-family: 'Roboto Slab', serif;
-            }
-            strong {
-                font-weight: 700;
-            }
-            em {
-                font-weight: 300;
-                font-style: italic;
-            }
-            li {
-                margin-top: 0.5rem;
-                margin-bottom: 0.5rem;
-            }
-            ol {
-                counter-reset: item;
-            }
-            ol li {
-                display: block;
-            }
-            ol li:before {
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                content: counters(item, ".") ". ";
-                counter-increment: item;
-            }
-            ul {
-                list-style: square;
-            }
-            a[href] {
-                color: dodgerblue;
-                position: relative;
-                text-decoration: none;
-            }
-            a[href]:before {
-                content: "";
-                position: absolute;
-                width: 100%;
-                height: 1px;
-                bottom: 0;
-                left: 0;
-                background-color: dodgerblue;
-                visibility: hidden;
-                -webkit-transition: all 0.3s ease-in-out 0s;
-                transition: all 0.3s ease-in-out 0s;
-                -webkit-transform: scaleX(0);
-                transform: scaleX(0);
-            }
-            a[href]:visited {
-                color: firebrick;
-            }
-            a[href]:hover:before {
-                visibility: visible;
-                -webkit-transform: scaleX(1);
-                transform: scaleX(1);
-            }
-            a[href]:visited:before {
-                background-color: firebrick;
-            }
-            code {
-                background-color: aliceblue;
-                font-family: 'Cousine', monospace;
-            }
-            .warning {
-                color: red;
-            }
-            
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                padding: 0;
-                margin: 0;
-            }
-            
-            table.table4 td, table.table4 th {
-                width: 25%;
-            }
-            table {
-                border: 2px #333 solid;
-            }
-            th, td {
-                border: 1px #333 solid;
-            }
-            tbody tr:nth-child(2n-1) {
-                background-color: antiquewhite;
-            }
-            td:not(.diff) {
-                text-align: center;
-            }
-            
-            
         </style>
+        <link rel="stylesheet" type="text/css" href="global.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="web.css"/>
+        <link rel="stylesheet" type="text/css" media="print" href="print.css"/>
     </head>
     
     <body>
@@ -175,9 +77,33 @@
                 </section>
                 <section>
                     <h3><a id="Introduction-Future">1.3.</a> Future Proofing</h3>
+                    <p>
+                        In order to allow a longer period between the creation of this software and a replacement being commisioned,
+                        certain elements are being taken into consideration. Primarily, the software is being created in an MVC style
+                        to promote reuse and easy modification of code. Such a style also enables extensibility by conforming to a
+                        predictable pattern - if the university wishes to expand upon this software in the future, an MVC style lends
+                        itself to this purpose.
+                    </p>
+                    <p>
+                        Further to this, usage of modern APIs and frameworks means that the software conforms to current standards,
+                        and should therefore age better than an equivelant software written using older packages - if any given
+                        library has a usable lifespan of 4 years, it follows that using a modern library will give more life to
+                        the project than a legacy one.
+                    </p>
                 </section>
                 <section>
                     <h3><a id="Introduction-Rationale">1.4.</a> Rationale for Development</h3>
+                    <p>
+                        There is a current (previously mentioned) system in place that provides many of the functions that are listed
+                        here. There are, however, some flaws that have prompted the creation of this new version. The largest missing
+                        feature from the current implementation is the ability for students to easily manage their SUMs profiles and
+                        propsed project ideas; once submitted, an idea must be completely resubmitted in order to respond to feedback
+                        and cannot be changed in place.
+                    </p>
+                    <p>
+                        There are also many concerns about the UX of the site, which will be addressed by this new version (see the
+                        milestones for implementation stages of UX improvements).
+                    </p>
                 </section>
                 <section>
                     <h3><a id="Introduction-Dependencies">1.5.</a> Interactions and Dependencies</h3>
@@ -220,18 +146,24 @@
                             This item is a reference for reconstructing this document and should not be changed.</span>
                             <ul>
                                 <li>
-                                    <strong>Heading</strong> content should be set in 700 weight Roboto Slab font or an alternative Serif 
-                                    font if Roboto Slab is unavailable.
+                                    <p>
+                                        <strong>Heading</strong> content should be set in 700 weight Roboto Slab font or an alternative Serif
+                                        font if Roboto Slab is unavailable.
+                                    </p>
                                 </li>
                                 <li>
-                                    <strong>Body</strong> content should be set in 400 weight Open Sans font, with bold elements using a weight
-                                    of 700 and italic elements using a weight of 300 in addition to italics hinting, or an alternative
-                                    Sans-Serif font if Open Sans is unavailable.
+                                    <p>
+                                        <strong>Body</strong> content should be set in 400 weight Open Sans font, with bold elements using a weight
+                                        of 700 and italic elements using a weight of 300 in addition to italics hinting, or an alternative
+                                        Sans-Serif font if Open Sans is unavailable.
+                                    </p>
                                 </li>
                                 <li>
-                                    <strong>Code</strong> elements and elements that denote <strong>user input</strong> should be set in 400
-                                    weight Cousine font with an aliceblue (<code>#F0F8FF</code>) background at the same font size as surrounding content,
-                                    or with an alternative Monospace font if Cousine is unavailable.
+                                    <p>
+                                        <strong>Code</strong> elements and elements that denote <strong>user input</strong> should be set in 400
+                                        weight Cousine font with an aliceblue (<code>#F0F8FF</code>) background at the same font size as surrounding content,
+                                        or with an alternative Monospace font if Cousine is unavailable.
+                                    </p>
                                 </li>
                             </ul>
                         </li>
@@ -241,20 +173,24 @@
                             each <code>section</code> should be an appropriate heading element, and may be followed by any valid content.
                             <ul>
                                 <li>
-                                    <strong>Headings: </strong> An appropriate heading is a <code>h-</code> element where <code>-</code> is
-                                    a number from 2 to 6 denoting the depth of the section. Sections in the root of <code>main</code> are
-                                    indexed at 2, with this number being incremented once for every additional containing <code>section</code>.
-                                    The first content of the heading element must be an <code>a</code> anchor tag with an <code>id</code> that
-                                    is referenced by a corresponding anchor in the contents list. The anchor tag must only contain the associated
-                                    full section number as present in the contents page. The remaining contents can include any valid inline elements
-                                    (including raw text).
+                                    <p>
+                                        <strong>Headings: </strong> An appropriate heading is a <code>h-</code> element where <code>-</code> is
+                                        a number from 2 to 6 denoting the depth of the section. Sections in the root of <code>main</code> are
+                                        indexed at 2, with this number being incremented once for every additional containing <code>section</code>.
+                                        The first content of the heading element must be an <code>a</code> anchor tag with an <code>id</code> that
+                                        is referenced by a corresponding anchor in the contents list. The anchor tag must only contain the associated
+                                        full section number as present in the contents page. The remaining contents can include any valid inline elements
+                                        (including raw text).
+                                    </p>
                                 </li>
                                 <li>
-                                    <strong>Contents: </strong>All items following the heading should be valid block level sectioning or content
-                                    elements (e.g. <code>div</code>, <code>p</code>, others). A numbered sectioning element <em>must not</em> contain
-                                    any inline elements such as <code>span</code> or <code>strong</code> - these should be within block level elements
-                                    so as to preserve semantic meaning and better enable machine interpretation by sensibly delimiting blocks of 
-                                    related content.
+                                    <p>
+                                        <strong>Contents: </strong>All items following the heading should be valid block level sectioning or content
+                                        elements (e.g. <code>div</code>, <code>p</code>, others). A numbered sectioning element <em>must not</em> contain
+                                        any inline elements such as <code>span</code> or <code>strong</code> - these should be within block level elements
+                                        so as to preserve semantic meaning and better enable machine interpretation by sensibly delimiting blocks of
+                                        related content.
+                                    </p>
                                 </li>
                             </ul>
                         </li>

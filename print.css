@@ -1,0 +1,23 @@
+* {
+    color: black !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+main {
+    width: 100%;
+}
+
+code {
+    background-color: lightgray;
+}
+
+main > section:not(:last-child) {
+    page-break-after: always;
+}
+p, section:not(main>section), table, tr, th, tbody, td, .table4 {
+    position: relative;
+    page-break-inside: avoid;
+}
