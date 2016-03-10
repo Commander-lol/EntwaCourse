@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/templates/layout.xhtml">
+            <ui:define name="body">
+                <h:form>
+                    <b:label text="Project Name"/>
+                    <b:inputText id="pName" placeholder="Project Name" label="Idea Name" class="bf-required" binding="#{ideaController.ideaName}">
+                    </b:inputText>
+                    
+                    <b:label text="Project Description"/>
+                    <b:inputTextarea placeholder="Project Description" label="Idea Name" class="bf-required">
+                    </b:inputTextarea>
+                    
+                    <b:button value="Submit Idea" look="success"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

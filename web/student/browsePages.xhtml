@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/templates/browse.xhtml">
+            <ui:define name="yourProjects">
+                <b:button look="info" value="New" tooltip="Create New Project" outcome="newIdea"></b:button>
+            </ui:define>
+            <ui:define name="allProjects">
+            </ui:define>
+            <ui:define name="settings">
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
