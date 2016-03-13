@@ -27,53 +27,30 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.entwasums.ctrl;
+package co.louiscap.entwasums.pers;
 
-import co.louiscap.entwasums.ents.properties.AccessLevel;
-import co.louiscap.entwasums.ents.Interactor;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import java.io.Serializable;
+import co.louiscap.entwasums.ents.PendingUser;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author Louis Capitanchik
  */
-@Named(value = "userManagerBean")
-@SessionScoped
-public class UserManagerBean implements Serializable {
-
-    private static final long serialVersionUID = -2332705795830173905L;
-
-    private Interactor user = null;
+@Stateless
+public class PendingUserFacade extends AbstractFacade<PendingUser> {
     
-    /**
-     * Creates a new instance of UserManagerBean
-     */
-    public UserManagerBean() {}
+    @PersistenceContext(unitName = "EntwaSumsPU")
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public PendingUserFacade() {
+        super(PendingUser.class);
+    }
     
-    public void setUser(Interactor user) {
-        this.user = user;
-    }
-    public Interactor getUser() {
-        return user;
-    }
-    public boolean isLoggedIn() {
-        return user != null;
-    }
-    public AccessLevel getAccessLevel() {
-        return user != null ?
-                user.getAccess() :
-                null;
-    }
-    public void logout() {
-        this.setUser(null);
-    }
-    public boolean isAccessLevel(AccessLevel level) {
-        return user.getAccess().equals(level);
-    }
-    public String doAuthRedirect(String viewId) {
-        System.out.println(viewId);
-        return "/index";
-    }
 }

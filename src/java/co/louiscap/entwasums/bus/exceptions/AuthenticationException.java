@@ -27,53 +27,17 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.entwasums.ctrl;
-
-import co.louiscap.entwasums.ents.properties.AccessLevel;
-import co.louiscap.entwasums.ents.Interactor;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import java.io.Serializable;
+package co.louiscap.entwasums.bus.exceptions;
 
 /**
- *
  * @author Louis Capitanchik
  */
-@Named(value = "userManagerBean")
-@SessionScoped
-public class UserManagerBean implements Serializable {
+public class AuthenticationException extends Exception {
 
-    private static final long serialVersionUID = -2332705795830173905L;
+    private static final long serialVersionUID = -2390955251377114942L;
 
-    private Interactor user = null;
+    public AuthenticationException(String reason) {
+        super(reason);
+    }
     
-    /**
-     * Creates a new instance of UserManagerBean
-     */
-    public UserManagerBean() {}
-    
-    public void setUser(Interactor user) {
-        this.user = user;
-    }
-    public Interactor getUser() {
-        return user;
-    }
-    public boolean isLoggedIn() {
-        return user != null;
-    }
-    public AccessLevel getAccessLevel() {
-        return user != null ?
-                user.getAccess() :
-                null;
-    }
-    public void logout() {
-        this.setUser(null);
-    }
-    public boolean isAccessLevel(AccessLevel level) {
-        return user.getAccess().equals(level);
-    }
-    public String doAuthRedirect(String viewId) {
-        System.out.println(viewId);
-        return "/index";
-    }
 }

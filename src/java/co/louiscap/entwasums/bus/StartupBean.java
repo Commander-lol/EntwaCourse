@@ -36,14 +36,12 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.faces.bean.ApplicationScoped;
 
 /**
- *
+ * Runs on application startup to ensure that an administrator user exists
  * @author Louis Capitanchik
  */
 
-@ApplicationScoped
 @Startup
 @Singleton
 public class StartupBean {

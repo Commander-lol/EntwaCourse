@@ -30,11 +30,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.entwasums.pers;
 
 import co.louiscap.entwasums.ents.Administrator;
+import co.louiscap.utils.Encrypt;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.Query;
 
 /**
  *
@@ -54,13 +55,23 @@ public class AdministratorFacade extends AbstractFacade<Administrator> {
     public AdministratorFacade() {
         super(Administrator.class);
     }
+
+    /**
+     * Encrypt the password before carrying on with the create
+     * @inheritDoc
+     */
+    @Override
+    public void create(Administrator entity) {
+        entity.setPassword(Encrypt.SHA256Hex(entity.getPassword()));
+        super.create(entity);
+    }    
     
     public Administrator findByUsername(String username) {
         Administrator admin;
-        TypedQuery<Administrator> q = em.createQuery("SELECT a FROM Administrator a WHERE a.username = :username", Administrator.class);
+        Query q = em.createQuery("SELECT a FROM Administrator a WHERE a.username = :username");
         q.setParameter("username", username);
         try {
-            admin = q.getSingleResult();
+            admin = (Administrator)q.getSingleResult();
         } catch(NoResultException nre) {
             admin = null;
         }

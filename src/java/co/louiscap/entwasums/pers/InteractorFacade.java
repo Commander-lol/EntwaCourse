@@ -30,9 +30,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.entwasums.pers;
 
 import co.louiscap.entwasums.ents.Interactor;
+import co.louiscap.utils.Encrypt;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -53,4 +56,19 @@ public class InteractorFacade extends AbstractFacade<Interactor> {
         super(Interactor.class);
     }
     
+    public Interactor getByUsername (String username) {
+        Query q = em.createQuery("SELECT i FROM Interactor i WHERE i.username = :username");
+        q.setParameter("username", username);
+        Interactor i;
+        try {
+            i = (Interactor) q.getSingleResult();
+            System.out.println(i);
+            System.out.println(i.getUsername());
+            System.out.println(i.getPassword());
+        } catch(NoResultException nre) {
+            i = null;
+        }
+        return i;
+        
+    }
 }

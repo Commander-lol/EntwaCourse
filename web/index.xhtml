@@ -11,8 +11,8 @@
         
         <ui:define name="pageCommands">
             <b:navbarLinks pull="right">
-                <b:navCommandLink action="#{loginBean.setNewUser(false)}" update=":loginform" ajax="true">Sign In</b:navCommandLink>
-                <b:navCommandLink action="#{loginBean.setNewUser(true)}" update=":loginform" ajax="true">Register</b:navCommandLink>
+                <b:navCommandLink action="#{loginBean.setNewUser(false)}" update=":loginform" ajax="true" styleClass="clickable">Sign In</b:navCommandLink>
+                <b:navCommandLink action="#{loginBean.setNewUser(true)}" update=":loginform" ajax="true" styleClass="clickable">Register</b:navCommandLink>
             </b:navbarLinks>
         </ui:define>
         
@@ -20,32 +20,42 @@
             <b:well>
                 <h:form id="loginform">
                     <b:panelGrid columns="2,6,4">
-                        <h:outputLabel for="username" value="Username:" class="valign"/>
-                            <b:inputText id="username" placeholder="username"
-                                         value="#{loginBean.username}" validator="#{loginBean.validateUsername}">
-                                <f:facet name="append">
-                                    <b:iconAwesome name="user"/>
-                                </f:facet>
-                            </b:inputText>
-                            <b:message for="username"/>
-                            
-                            <h:outputLabel for="password" value="Password:" class="valign"/>
-                            <b:inputText id="password" placeholder="password" type="password" value="#{loginBean.password}">
-                                <f:facet name="append">
-                                    <b:iconAwesome name="lock"/>
-                                </f:facet>
-                            </b:inputText>
-                            <b:message for="password"/>
-                            
-                            <h:outputLabel for="confPassword" value="Confirm Password:" rendered="#{loginBean.newUser}" class="valign"/>
-                            <b:inputText 
-                                id="confPassword" placeholder="password" type="password"
-                                value="#{loginBean.passwordConf}" rendered="#{loginBean.newUser}">
-                                <f:facet name="append">
-                                    <b:iconAwesome name="lock"/>
-                                </f:facet>
-                            </b:inputText>
-                            <b:message for="confPassword"/>
+                        <h:outputLabel for="username" value="Username:" styleClass="valign"/>
+                        <b:inputText id="username" placeholder="username"
+                                     value="#{loginBean.username}" validator="#{loginBean.validateUsername}">
+                            <f:facet name="append">
+                                <b:iconAwesome name="user" size="lg"/>
+                            </f:facet>
+                        </b:inputText>
+                        <b:message for="username"/>
+
+                        <h:outputLabel for="password" value="Password:" styleClass="valign"/>
+                        <b:inputText id="password" placeholder="password" type="password" 
+                                     tooltip="Must contain at least 6 characters" value="#{loginBean.password}">
+                            <f:facet name="append">
+                                <b:iconAwesome name="lock" size="lg"/>
+                            </f:facet>
+                        </b:inputText>
+                        <b:message for="password"/>
+
+                        <h:outputLabel for="confPassword" value="Confirm Password:" rendered="#{loginBean.newUser}" styleClass="valign"/>
+                        <b:inputText
+                            id="confPassword" placeholder="password" type="password" tooltip="Must match password"
+                            value="#{loginBean.passwordConf}" rendered="#{loginBean.newUser}">
+                            <f:facet name="append">
+                                <b:iconAwesome name="lock" size="lg"/>
+                            </f:facet>
+                        </b:inputText>
+                        <b:message for="confPassword"/>
+
+                        <h:outputLabel for="email" value="Email:" styleClass="valign" rendered="#{loginBean.newUser}"/>
+                        <b:inputText id="email" placeholder="example@mail.com" type="email"
+                                     value="#{loginBean.email}" rendered="#{loginBean.newUser}">
+                            <f:facet name="append">
+                                <b:iconAwesome name="envelope" size="lg"/>
+                            </f:facet>
+                        </b:inputText>
+                        <b:message for="email" rendered="#{loginBean.newUser}"/>
                     </b:panelGrid>
                     <b:row>
                         <b:column span="2" offset="2">

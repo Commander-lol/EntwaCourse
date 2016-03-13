@@ -31,50 +31,27 @@ package co.louiscap.entwasums.ents;
 
 import co.louiscap.entwasums.ents.properties.AccessLevel;
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 /**
+ *
  * @author Louis Capitanchik
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Interactor implements Serializable {
+public class PendingUser implements Serializable {
 
-    private static final long serialVersionUID = -2354073924152065844L;
-
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     private Long id;
 
-    @NotNull
-    private String name;
+    private String username, password;
     
-    @NotNull
-    private String username;
+    private AccessLevel requestedAccess;
     
-    @NotNull
-    private String password;
-    
-    private AccessLevel access = AccessLevel.STUDENT;
-    
-    private boolean accepted = false;
-    
-    /**
-     * A list of potential ideas created by this interactor; anybody who
-     * is signed up to SUMS can submit an idea for approval
-     */
-    @OneToMany(mappedBy = "creator")
-    private List<Idea> ideas;
-
     public Long getId() {
         return id;
     }
@@ -83,53 +60,60 @@ public abstract class Interactor implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    /**
+     * Get the value of username
+     *
+     * @return the value of username
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Set the value of username
+     *
+     * @param username new value of username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Get the value of password
+     *
+     * @return the value of password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Set the value of password
+     *
+     * @param password new value of password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public boolean isAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
-    }
-
-    public AccessLevel getAccess() {
-        return access;
-    }
-
-    public void setAccess(AccessLevel access) {
-        this.access = access;
-    }
     
-    public List<Idea> getIdeas() {
-        return ideas;
+    /**
+     * Get the value of requestedAccess
+     *
+     * @return the value of requestedAccess
+     */
+    public AccessLevel getRequestedAccess() {
+        return requestedAccess;
     }
 
-    public void setIdeas(List<Idea> ideas) {
-        this.ideas = ideas;
+    /**
+     * Set the value of requestedAccess
+     *
+     * @param requestedAccess new value of requestedAccess
+     */
+    public void setRequestedAccess(AccessLevel requestedAccess) {
+        this.requestedAccess = requestedAccess;
     }
+
 
     @Override
     public int hashCode() {
@@ -140,11 +124,12 @@ public abstract class Interactor implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Interactor)) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof PendingUser)) {
             return false;
         }
-        Interactor other = (Interactor) object;
-        if (this.id.equals(other.id)) {
+        PendingUser other = (PendingUser) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -152,7 +137,7 @@ public abstract class Interactor implements Serializable {
 
     @Override
     public String toString() {
-        return "co.louiscap.entwasums.entities.User[ id=" + id + " ]";
+        return "co.louiscap.entwasums.ents.PendingUser[ id=" + id + " ]";
     }
-
+    
 }

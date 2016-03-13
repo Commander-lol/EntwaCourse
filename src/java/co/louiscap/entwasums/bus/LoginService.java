@@ -29,7 +29,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.bus;
 
+import co.louiscap.entwasums.bus.exceptions.AuthenticationException;
+import co.louiscap.entwasums.ctrl.UserManagerBean;
+import co.louiscap.entwasums.ents.Interactor;
+import co.louiscap.entwasums.ents.PendingUser;
+import co.louiscap.entwasums.pers.InteractorFacade;
+import co.louiscap.entwasums.pers.PendingUserFacade;
+import co.louiscap.utils.Encrypt;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
@@ -37,5 +46,42 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class LoginService {
-
+    @EJB
+    private InteractorFacade inf;
+    @EJB
+    private PendingUserFacade puf;
+    
+    @Inject
+    private UserManagerBean umb;
+    
+    public boolean login(String username, String password) throws AuthenticationException{
+        Interactor i = inf.getByUsername(username);
+        if(i == null) {
+            throw new AuthenticationException("Invalid Username or Password");
+        } else {
+            if(Encrypt.VerifySHA256Hex(password, i.getPassword())) {
+                umb.setUser(i);
+                return true;
+            } else {
+                throw new AuthenticationException("Invalid Username or Password");
+            }
+        }
+    }
+    
+    public void logout() {
+        umb.logout();
+    }
+    
+    public boolean checkIfUsernameAvailable (String username) {
+        Interactor i = inf.getByUsername(username);
+        return i == null;
+    }
+    
+    public void registerNewUser(String username, String password) {
+        PendingUser pu = new PendingUser();
+        pu.setUsername(username);
+        pu.setPassword(password);
+        
+        puf.create(pu);
+    }
 }

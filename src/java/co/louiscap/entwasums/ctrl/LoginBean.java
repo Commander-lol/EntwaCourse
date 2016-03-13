@@ -29,6 +29,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.ctrl;
 
+import co.louiscap.entwasums.bus.LoginService;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.faces.application.FacesMessage;
@@ -62,6 +64,9 @@ public class LoginBean {
     
     @Inject
     protected UserManagerBean umb;
+    
+    @EJB
+    protected LoginService ls;
 
     
     /**
@@ -174,17 +179,21 @@ public class LoginBean {
     }
     
     private String doLogin() {
-        return "";
+        return null;
     }
 
     private String doSignup() {
-        return "";
+        if(getPassword().equals(getPasswordConf())) {
+            //
+        } return null;
     }
     
     public void validateUsername(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-        if(false) {
-            String message = "That username is already in use";
-            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+        if(isNewUser()) {
+            if(!ls.checkIfUsernameAvailable((String) value)) {
+                String message = "That username is already in use";
+                throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+            }
         }
     }
 }
