@@ -62,13 +62,9 @@ public class InteractorFacade extends AbstractFacade<Interactor> {
         Interactor i;
         try {
             i = (Interactor) q.getSingleResult();
-            System.out.println(i);
-            System.out.println(i.getUsername());
-            System.out.println(i.getPassword());
         } catch(NoResultException nre) {
             i = null;
         }
         return i;
-        
     }
 }

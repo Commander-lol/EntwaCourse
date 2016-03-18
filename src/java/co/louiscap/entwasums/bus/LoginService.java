@@ -33,6 +33,7 @@ import co.louiscap.entwasums.bus.exceptions.AuthenticationException;
 import co.louiscap.entwasums.ctrl.UserManagerBean;
 import co.louiscap.entwasums.ents.Interactor;
 import co.louiscap.entwasums.ents.PendingUser;
+import co.louiscap.entwasums.ents.properties.AccessLevel;
 import co.louiscap.entwasums.pers.InteractorFacade;
 import co.louiscap.entwasums.pers.PendingUserFacade;
 import co.louiscap.utils.Encrypt;
@@ -41,7 +42,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
- *
  * @author Louis Capitanchik
  */
 @Stateless
@@ -73,14 +73,18 @@ public class LoginService {
     }
     
     public boolean checkIfUsernameAvailable (String username) {
-        Interactor i = inf.getByUsername(username);
-        return i == null;
+        Interactor asUser = inf.getByUsername(username);
+        PendingUser asPU = puf.getByUsername(username);
+        return asUser == null && asPU == null;
     }
     
-    public void registerNewUser(String username, String password) {
+    public void registerNewUser(String username, String password, AccessLevel access) {
         PendingUser pu = new PendingUser();
-        pu.setUsername(username);
-        pu.setPassword(password);
+        if(!checkIfUsernameAvailable(username)) {
+            pu.setUsername(username);
+            pu.setPassword(password);
+            pu.setRequestedAccess(access);
+        }
         
         puf.create(pu);
     }

@@ -54,7 +54,7 @@ public class StartupBean {
         System.out.println("Running Admin Existence Routine");
         Administrator admin = am.findByUsername("global");
         if(admin == null) {
-        System.out.println("MAKIN NEW ADMIn Admin Existence Routine");
+            System.out.println("Creating New Admin User");
             admin = new Administrator();
             admin.setAccepted(true);
             admin.setAccess(AccessLevel.ADMIN);

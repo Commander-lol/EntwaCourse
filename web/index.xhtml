@@ -47,16 +47,17 @@
                             </f:facet>
                         </b:inputText>
                         <b:message for="confPassword"/>
-
-                        <h:outputLabel for="email" value="Email:" styleClass="valign" rendered="#{loginBean.newUser}"/>
-                        <b:inputText id="email" placeholder="example@mail.com" type="email"
-                                     value="#{loginBean.email}" rendered="#{loginBean.newUser}">
-                            <f:facet name="append">
-                                <b:iconAwesome name="envelope" size="lg"/>
-                            </f:facet>
-                        </b:inputText>
-                        <b:message for="email" rendered="#{loginBean.newUser}"/>
+                        
+                        <h:outputLabel for="access" value="Account Type:" rendered="#{loginBean.newUser}" styleClass="valign"/>
+                        <b:selectOneMenu value="#{loginBean.access}" rendered="#{loginBean.newUser}">
+                            <f:selectItems id="access" value="#{loginBean.validAccess}"
+                                           var="acc" itemValue="#{acc}"
+                                           itemLabel="#{acc.name}"/>
+                        </b:selectOneMenu>
+                        <b:message for="access" rendered="#{loginBean.newUser}"/>
+                                       
                     </b:panelGrid>
+                   
                     <b:row>
                         <b:column span="2" offset="2">
                             <b:commandButton action="#{loginBean.attemptLogin}" value="#{loginBean.getButtonText()}" ajax="true"/>

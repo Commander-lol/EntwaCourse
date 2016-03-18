@@ -33,8 +33,22 @@ package co.louiscap.entwasums.ents.properties;
  * @author Louis Capitanchik
  */
 public enum AccessLevel {
-    STUDENT,
-    ORGANISATION,
-    STAFF,
-    ADMIN
+    STUDENT("student"),
+    ORGANISATION("organisation"),
+    STAFF("staff"),
+    ADMIN("admin");
+    
+    public final String name;
+    private AccessLevel(String name) {
+        this.name = name;
+    }
+    public boolean is(AccessLevel other) {
+        return this.name.equals(other.name);
+    }
+    public boolean is(String name) {
+        return this.name.equals(name);
+    }
+    public String getName() {
+        return this.name;
+    }
 }

@@ -29,10 +29,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.pers;
 
+import co.louiscap.entwasums.ents.Interactor;
 import co.louiscap.entwasums.ents.PendingUser;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -51,6 +54,18 @@ public class PendingUserFacade extends AbstractFacade<PendingUser> {
 
     public PendingUserFacade() {
         super(PendingUser.class);
+    }
+
+    public PendingUser getByUsername(String username) {
+        Query q = em.createQuery("SELECT pu FROM PendingUser pu WHERE pu.username = :username");
+        q.setParameter("username", username);
+        PendingUser pu;
+        try {
+            pu = (PendingUser) q.getSingleResult();
+        } catch(NoResultException nre) {
+            pu = null;
+        }
+        return pu;
     }
     
 }

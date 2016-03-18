@@ -30,6 +30,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.entwasums.ctrl;
 
 import co.louiscap.entwasums.bus.LoginService;
+import co.louiscap.entwasums.bus.exceptions.AuthenticationException;
+import co.louiscap.entwasums.ents.properties.AccessLevel;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -58,9 +62,13 @@ public class LoginBean {
 
     private String passwordConf;
 
-    private String email;
-
+    private AccessLevel access;
+    
     private boolean newUser;
+    
+    private List<AccessLevel> validAccess;
+    static {
+    }
     
     @Inject
     protected UserManagerBean umb;
@@ -74,6 +82,10 @@ public class LoginBean {
      */
     public LoginBean() {
         newUser = false;
+        validAccess = new ArrayList<>();
+        validAccess.add(AccessLevel.STUDENT);
+        validAccess.add(AccessLevel.STAFF);
+        validAccess.add(AccessLevel.ORGANISATION);
     }
     
     /**
@@ -113,24 +125,6 @@ public class LoginBean {
     }
 
     /**
-     * Get the value of email
-     *
-     * @return the value of email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Set the value of email
-     *
-     * @param email new value of email
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
      * Get the value of password
      *
      * @return the value of password
@@ -166,6 +160,22 @@ public class LoginBean {
         this.username = username;
     }
 
+    public AccessLevel getAccess() {
+        return access;
+    }
+
+    public void setAccess(AccessLevel access) {
+        this.access = access;
+    }
+
+    public List<AccessLevel> getValidAccess() {
+        return validAccess;
+    }
+
+    public void setValidAccess(List<AccessLevel> validAccess) {
+        this.validAccess = validAccess;
+    }
+    
     public String attemptLogin() {
         if (newUser) {
             return doSignup();
@@ -179,13 +189,20 @@ public class LoginBean {
     }
     
     private String doLogin() {
-        return null;
+        try {
+            ls.login(username, password);
+            String controlPanel = "/" + umb.getUser().getAccess().name + "/index";
+            return controlPanel;
+        } catch (AuthenticationException ex) {
+            String message = ex.getMessage();
+            FacesContext.getCurrentInstance().addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+            return null;
+        }
     }
 
     private String doSignup() {
-        if(getPassword().equals(getPasswordConf())) {
-            //
-        } return null;
+        ls.registerNewUser(username, password, access);
+        return null;
     }
     
     public void validateUsername(FacesContext context, UIComponent component, Object value) throws ValidatorException {

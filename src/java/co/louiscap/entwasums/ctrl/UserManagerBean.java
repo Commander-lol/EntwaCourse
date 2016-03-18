@@ -45,7 +45,7 @@ public class UserManagerBean implements Serializable {
 
     private static final long serialVersionUID = -2332705795830173905L;
 
-    private Interactor user = null;
+    private Interactor sessionUser = null;
     
     /**
      * Creates a new instance of UserManagerBean
@@ -53,24 +53,24 @@ public class UserManagerBean implements Serializable {
     public UserManagerBean() {}
     
     public void setUser(Interactor user) {
-        this.user = user;
+        this.sessionUser = user;
     }
     public Interactor getUser() {
-        return user;
+        return sessionUser;
     }
     public boolean isLoggedIn() {
-        return user != null;
+        return sessionUser != null;
     }
     public AccessLevel getAccessLevel() {
-        return user != null ?
-                user.getAccess() :
+        return sessionUser != null ?
+                sessionUser.getAccess() :
                 null;
     }
     public void logout() {
         this.setUser(null);
     }
     public boolean isAccessLevel(AccessLevel level) {
-        return user.getAccess().equals(level);
+        return sessionUser.getAccess().equals(level);
     }
     public String doAuthRedirect(String viewId) {
         System.out.println(viewId);
