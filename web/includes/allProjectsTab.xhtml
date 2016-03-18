@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui">
+    <b:tab title="All Projects">
+        <b:well>
+            <ui:repeat value="#{ideaController.availableIdeas}" var="idea">
+                <ui:include src="/includes/ideaEntry.xhtml">
+                    <ui:param name="target" value="#{idea}"/>
+                </ui:include>
+            </ui:repeat>
+        </b:well>
+    </b:tab>
+</ui:composition>
+

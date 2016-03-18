@@ -19,19 +19,16 @@
                 cursor: pointer;
             }
         </style>
-        <f:metadata>
-            <f:viewAction action="#{userManagerBean.doAuthRedirect(view.viewId)}"/>
-        </f:metadata>
     </h:head>
     <h:body>
         <b:navBar brand="SUMS" class="no-corner">
-            <ui:insert name="pageCommands">Page Commands</ui:insert>
+            <ui:insert name="pageCommands"></ui:insert>
             <b:navbarLinks pull="right">
-                <b:navCommandLink rendered="#{userManagerBean.loggedIn}"><b:iconAwesome name="user"/> Sign Out</b:navCommandLink>
+                <b:navCommandLink rendered="#{userManagerBean.loggedIn}" outcome="#{userManagerBean.logout()}"><b:iconAwesome name="user"/> Sign Out</b:navCommandLink>
             </b:navbarLinks>
         </b:navBar>
         <b:container>
-            <ui:insert name="body">Main Body</ui:insert>
+            <ui:insert name="body"></ui:insert>
         </b:container>
     </h:body>
 </html>

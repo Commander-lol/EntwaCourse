@@ -52,14 +52,14 @@ public class StartupBean {
     @PostConstruct
     public void init() {
         System.out.println("Running Admin Existence Routine");
-        Administrator admin = am.findByUsername("global");
+        Administrator admin = am.findByUsername("admin");
         if(admin == null) {
             System.out.println("Creating New Admin User");
             admin = new Administrator();
             admin.setAccepted(true);
             admin.setAccess(AccessLevel.ADMIN);
-            admin.setPassword("admin");
-            admin.setUsername("global");
+            admin.setPassword("global");
+            admin.setUsername("admin");
             am.create(admin);
         } else {
             System.out.println(admin);

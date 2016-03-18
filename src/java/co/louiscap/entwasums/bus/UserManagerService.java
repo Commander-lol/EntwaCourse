@@ -27,45 +27,45 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.entwasums.pers;
+package co.louiscap.entwasums.bus;
 
-import co.louiscap.entwasums.ents.Idea;
-import java.util.ArrayList;
+import co.louiscap.entwasums.ctrl.UserManagerBean;
+import co.louiscap.entwasums.ents.PendingUser;
+import co.louiscap.entwasums.ents.properties.AccessLevel;
+import co.louiscap.entwasums.pers.InteractorFacade;
+import co.louiscap.entwasums.pers.OrganisationFacade;
+import co.louiscap.entwasums.pers.PendingUserFacade;
+import co.louiscap.entwasums.pers.StaffFacade;
+import co.louiscap.entwasums.pers.StudentFacade;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.inject.Inject;
 
 /**
- *
  * @author Louis Capitanchik
  */
 @Stateless
-public class IdeaFacade extends AbstractFacade<Idea> {
-
-    @PersistenceContext(unitName = "EntwaSumsPU")
-    private EntityManager em;
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
-    public IdeaFacade() {
-        super(Idea.class);
-    }
-
-    public List<Idea> getAvailableIdeas() {
-        Query q = em.createQuery("SELECT i FROM Idea i WHERE i.implementor IS NULL");
-        List<Idea> availableIdeas;
-        try {
-            availableIdeas = (List<Idea>)q.getResultList();
-        } catch (NoResultException nre) {
-            availableIdeas = new ArrayList<>();
+public class UserManagerService {
+    @Inject
+    UserManagerBean umb;
+    @EJB
+    InteractorFacade inf;
+    @EJB
+    StudentFacade studentf;
+    @EJB
+    StaffFacade stafff;
+    @EJB
+    OrganisationFacade of;
+    @EJB
+    PendingUserFacade puf;
+    
+    public List<PendingUser> getPendingUsers() {
+        if(!umb.isAccessLevel(AccessLevel.ADMIN)){
+            throw new AuthorisationException();
         }
-        return availableIdeas;
+        return puf.getAllPendingUsers();
     }
     
+    public void createUserOfType
 }

@@ -31,17 +31,19 @@ package co.louiscap.entwasums.ctrl;
 
 import co.louiscap.entwasums.bus.LoginService;
 import co.louiscap.entwasums.bus.exceptions.AuthenticationException;
+import co.louiscap.entwasums.bus.exceptions.UsernameExistsException;
+import co.louiscap.entwasums.ents.Interactor;
 import co.louiscap.entwasums.ents.properties.AccessLevel;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.inject.Inject;
+import javax.inject.Named;
+import javax.faces.view.ViewScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -50,78 +52,34 @@ import javax.validation.constraints.Size;
  * @author Louis Capitanchik
  */
 @Named(value = "loginBean")
-@RequestScoped
-public class LoginBean {
+@ViewScoped
+public class LoginBean implements Serializable {
+
+    private static final long serialVersionUID = -4123423684126981494L;
 
     @NotNull(message = "Username cannot be blank")
     private String username;
-
+    
     @NotNull(message = "Password cannot be blank")
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
-
     private String passwordConf;
-
     private AccessLevel access;
-    
     private boolean newUser;
-    
-    private List<AccessLevel> validAccess;
-    static {
-    }
-    
-    @Inject
-    protected UserManagerBean umb;
     
     @EJB
     protected LoginService ls;
-
+    
+    private List<AccessLevel> validAccess;
     
     /**
      * Creates a new instance of LoginBean
      */
     public LoginBean() {
-        newUser = false;
         validAccess = new ArrayList<>();
         validAccess.add(AccessLevel.STUDENT);
         validAccess.add(AccessLevel.STAFF);
         validAccess.add(AccessLevel.ORGANISATION);
-    }
-    
-    /**
-     * Get the value of passwordConf
-     *
-     * @return the value of passwordConf
-     */
-    public String getPasswordConf() {
-        return passwordConf;
-    }
-
-    /**
-     * Set the value of passwordConf
-     *
-     * @param passwordConf new value of passwordConf
-     */
-    public void setPasswordConf(String passwordConf) {
-        this.passwordConf = passwordConf;
-    }
-
-    /**
-     * Get the value of newUser
-     *
-     * @return the value of newUser
-     */
-    public boolean isNewUser() {
-        return newUser;
-    }
-
-    /**
-     * Set the value of newUser
-     *
-     * @param newUser new value of newUser
-     */
-    public void setNewUser(boolean newUser) {
-        this.newUser = newUser;
     }
 
     /**
@@ -142,6 +100,63 @@ public class LoginBean {
         this.password = password;
     }
 
+
+    /**
+     * Get the value of passwordConf
+     *
+     * @return the value of passwordConf
+     */
+    public String getPasswordConf() {
+        return passwordConf;
+    }
+
+    /**
+     * Set the value of passwordConf
+     *
+     * @param passwordConf new value of passwordConf
+     */
+    public void setPasswordConf(String passwordConf) {
+        this.passwordConf = passwordConf;
+    }
+
+
+    /**
+     * Get the value of access
+     *
+     * @return the value of access
+     */
+    public AccessLevel getAccess() {
+        return access;
+    }
+
+    /**
+     * Set the value of access
+     *
+     * @param access new value of access
+     */
+    public void setAccess(AccessLevel access) {
+        this.access = access;
+    }
+
+
+    /**
+     * Get the value of newUser
+     *
+     * @return the value of newUser
+     */
+    public boolean isNewUser() {
+        return newUser;
+    }
+
+    /**
+     * Set the value of newUser
+     *
+     * @param newUser new value of newUser
+     */
+    public void setNewUser(boolean newUser) {
+        this.newUser = newUser;
+    }
+
     /**
      * Get the value of username
      *
@@ -159,50 +174,66 @@ public class LoginBean {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    public AccessLevel getAccess() {
-        return access;
-    }
-
-    public void setAccess(AccessLevel access) {
-        this.access = access;
-    }
-
+    
+    /**
+     * Get the value of validAccess
+     * 
+     * @return the value of validAccess
+     */
     public List<AccessLevel> getValidAccess() {
         return validAccess;
     }
 
+    /**
+     * Set the value of validAccess
+     * 
+     * @param validAccess new value of validAccess
+     */
     public void setValidAccess(List<AccessLevel> validAccess) {
         this.validAccess = validAccess;
     }
     
+    
     public String attemptLogin() {
+        System.out.println("ATTEMPTING LOGIN");
         if (newUser) {
+            System.out.println("NEW USER");
             return doSignup();
         } else {
+            System.out.println("EXS USER");
             return doLogin();
         }
     }
 
-    public String getButtonText() {
+    public String getActionType() {
         return isNewUser() ? "Register" : "Sign In";
     }
     
     private String doLogin() {
         try {
-            ls.login(username, password);
-            String controlPanel = "/" + umb.getUser().getAccess().name + "/index";
+            Interactor i = ls.login(username, password);
+            String controlPanel = "/" + i.getAccess().name + "/index";
+            System.out.println(controlPanel);
             return controlPanel;
         } catch (AuthenticationException ex) {
             String message = ex.getMessage();
+            ex.printStackTrace(System.err);
             FacesContext.getCurrentInstance().addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
             return null;
         }
     }
 
     private String doSignup() {
-        ls.registerNewUser(username, password, access);
-        return null;
+        try {
+            ls.registerNewUser(username, password, access);
+        } catch (UsernameExistsException ex) {
+            String message = ex.getMessage();
+            ex.printStackTrace(System.err);
+            FacesContext.getCurrentInstance().addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+            return null;
+        }
+        System.out.println("COMPLETE REGISTER");
+        return "/pending";
     }
     
     public void validateUsername(FacesContext context, UIComponent component, Object value) throws ValidatorException {

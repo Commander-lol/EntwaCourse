@@ -27,45 +27,50 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.entwasums.pers;
+package co.louiscap.entwasums.ctrl;
 
-import co.louiscap.entwasums.ents.Idea;
-import java.util.ArrayList;
+import co.louiscap.entwasums.bus.UserManagerService;
+import co.louiscap.entwasums.ents.PendingUser;
+import java.io.Serializable;
 import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.ejb.EJB;
+import javax.inject.Named;
+import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author Louis Capitanchik
  */
-@Stateless
-public class IdeaFacade extends AbstractFacade<Idea> {
+@Named(value = "administrativeBean")
+@ViewScoped
+public class AdministrativeBean implements Serializable{
 
-    @PersistenceContext(unitName = "EntwaSumsPU")
-    private EntityManager em;
+    private static final long serialVersionUID = 1784771828717971738L;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    @EJB
+    UserManagerService ums;
+    
+//    List<PendingUser> pendingUsers;
+    
+    /**
+     * Creates a new instance of AdministrativeBean
+     */
+    public AdministrativeBean() {
+//        pendingUsers = ums.getPendingUsers();
     }
-
-    public IdeaFacade() {
-        super(Idea.class);
+    
+    public List<PendingUser> getPendingUsers() {
+        return ums.getPendingUsers();
     }
-
-    public List<Idea> getAvailableIdeas() {
-        Query q = em.createQuery("SELECT i FROM Idea i WHERE i.implementor IS NULL");
-        List<Idea> availableIdeas;
-        try {
-            availableIdeas = (List<Idea>)q.getResultList();
-        } catch (NoResultException nre) {
-            availableIdeas = new ArrayList<>();
-        }
-        return availableIdeas;
+    
+    public String acceptUser(PendingUser pu) {
+        System.out.println("Accepted " + pu.getUsername());
+        return null;
+    }
+    
+    public String rejectUser(PendingUser pu) {
+        System.out.println("Rejected " + pu.getUsername());
+        return null;
     }
     
 }

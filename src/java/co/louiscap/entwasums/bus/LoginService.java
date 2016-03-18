@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.entwasums.bus;
 
 import co.louiscap.entwasums.bus.exceptions.AuthenticationException;
+import co.louiscap.entwasums.bus.exceptions.UsernameExistsException;
 import co.louiscap.entwasums.ctrl.UserManagerBean;
 import co.louiscap.entwasums.ents.Interactor;
 import co.louiscap.entwasums.ents.PendingUser;
@@ -54,14 +55,14 @@ public class LoginService {
     @Inject
     private UserManagerBean umb;
     
-    public boolean login(String username, String password) throws AuthenticationException{
+    public Interactor login(String username, String password) throws AuthenticationException{
         Interactor i = inf.getByUsername(username);
         if(i == null) {
             throw new AuthenticationException("Invalid Username or Password");
         } else {
             if(Encrypt.VerifySHA256Hex(password, i.getPassword())) {
                 umb.setUser(i);
-                return true;
+                return i;
             } else {
                 throw new AuthenticationException("Invalid Username or Password");
             }
@@ -78,14 +79,16 @@ public class LoginService {
         return asUser == null && asPU == null;
     }
     
-    public void registerNewUser(String username, String password, AccessLevel access) {
+    public void registerNewUser(String username, String password, AccessLevel access) throws UsernameExistsException {
         PendingUser pu = new PendingUser();
-        if(!checkIfUsernameAvailable(username)) {
+        if(checkIfUsernameAvailable(username)) {
             pu.setUsername(username);
             pu.setPassword(password);
             pu.setRequestedAccess(access);
+            puf.create(pu);
+        } else {
+            throw new UsernameExistsException("The username " + username + " already exists");
         }
         
-        puf.create(pu);
     }
 }

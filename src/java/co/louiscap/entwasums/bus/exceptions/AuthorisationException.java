@@ -27,45 +27,16 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.entwasums.pers;
-
-import co.louiscap.entwasums.ents.Idea;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+package co.louiscap.entwasums.bus.exceptions;
 
 /**
- *
  * @author Louis Capitanchik
  */
-@Stateless
-public class IdeaFacade extends AbstractFacade<Idea> {
+public class AuthorisationException extends Exception {
 
-    @PersistenceContext(unitName = "EntwaSumsPU")
-    private EntityManager em;
+    private static final long serialVersionUID = -1512306065551791828L;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
-    public IdeaFacade() {
-        super(Idea.class);
-    }
-
-    public List<Idea> getAvailableIdeas() {
-        Query q = em.createQuery("SELECT i FROM Idea i WHERE i.implementor IS NULL");
-        List<Idea> availableIdeas;
-        try {
-            availableIdeas = (List<Idea>)q.getResultList();
-        } catch (NoResultException nre) {
-            availableIdeas = new ArrayList<>();
-        }
-        return availableIdeas;
+    public AuthorisationException() {
     }
     
 }

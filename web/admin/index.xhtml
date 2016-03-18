@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <ui:composition template="/templates/tabbedInterface.xhtml">
+            <ui:define name="tabs">
+                <b:tab title="Pending Users">
+                    <b:well>
+                        <h:form>
+                            <ui:repeat var="user" value="#{administrativeBean.pendingUsers}">
+                                <b:row style="margin-bottom: 1em;">
+                                    <b:column span="8">
+                                        <h:outputLabel value="#{user.username}"/>
+                                    </b:column>
+                                    <b:column span="2">
+                                        <b:commandButton value="Accept" look="success" 
+                                                         action="#{administrativeBean.acceptUser(user)}" 
+                                                         update="@form"/>
+                                    </b:column>
+                                    <b:column span="2">
+                                        <b:commandButton value="Reject" action="#{administrativeBean.rejectUser(user)}" look="warning"/>
+                                    </b:column>
+                                </b:row>
+                            </ui:repeat>
+                        </h:form>
+                    </b:well>
+                </b:tab>
+                <ui:include src="/includes/allProjectsTab.xhtml"/>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

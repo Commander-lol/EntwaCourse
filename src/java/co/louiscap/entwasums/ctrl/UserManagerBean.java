@@ -66,14 +66,12 @@ public class UserManagerBean implements Serializable {
                 sessionUser.getAccess() :
                 null;
     }
-    public void logout() {
+    public String logout() {
         this.setUser(null);
+        System.out.println("aosidnoinasd");
+        return "/index";
     }
     public boolean isAccessLevel(AccessLevel level) {
         return sessionUser.getAccess().equals(level);
-    }
-    public String doAuthRedirect(String viewId) {
-        System.out.println(viewId);
-        return "/index";
     }
 }

@@ -29,8 +29,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.pers;
 
-import co.louiscap.entwasums.ents.Interactor;
 import co.louiscap.entwasums.ents.PendingUser;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -66,6 +67,17 @@ public class PendingUserFacade extends AbstractFacade<PendingUser> {
             pu = null;
         }
         return pu;
+    }
+    
+    public List<PendingUser> getAllPendingUsers() {
+        Query q = em.createQuery("SELECT pu FROM PendingUser pu WHERE 1=1");
+        List<PendingUser> pus;
+        try {
+            pus = (List<PendingUser>) q.getResultList();
+        } catch(NoResultException nre) {
+            pus = new ArrayList<>();
+        }
+        return pus;
     }
     
 }

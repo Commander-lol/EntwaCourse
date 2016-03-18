@@ -29,8 +29,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.ctrl;
 
+import co.louiscap.entwasums.bus.IdeaService;
 import co.louiscap.entwasums.ents.Idea;
-import co.louiscap.entwasums.pers.IdeaFacade;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -46,6 +47,9 @@ public class IdeaController {
     private String ideaName;
     
     private String ideaDesciption;
+    
+    @EJB
+    private IdeaService is;
 
     /**
      * Creates a new instance of IdeaController
@@ -68,4 +72,8 @@ public class IdeaController {
     public void setIdeaDesciption(String ideaDesciption) {
         this.ideaDesciption = ideaDesciption;
     }    
+    
+    public List<Idea> getAvailableIdeas() {
+        return is.getAvailableIdeas();
+    }
 }

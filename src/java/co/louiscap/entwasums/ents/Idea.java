@@ -114,6 +114,10 @@ public class Idea implements Serializable {
     public void setImplementor(Student implementor) {
         this.implementor = implementor;
     }
+    
+    public boolean isByOrganisation() {
+        return creator instanceof Organisation;
+    }
 
     @Override
     public int hashCode() {
