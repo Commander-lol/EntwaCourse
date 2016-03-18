@@ -29,10 +29,16 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.ents;
 
+import co.louiscap.entwasums.ents.properties.AccessLevel;
 import javax.persistence.Entity;
 
 @Entity
 public class Organisation extends Interactor {
     private static final long serialVersionUID = -8188984617264417018L;
     
+    public Organisation() {
+        super();
+        this.setAccess(AccessLevel.ORGANISATION);
+    }
+
 }

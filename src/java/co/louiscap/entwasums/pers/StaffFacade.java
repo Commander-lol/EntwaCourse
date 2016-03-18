@@ -41,7 +41,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class StaffFacade extends AbstractFacade<Staff> {
 
-    @PersistenceContext(unitName = "EntwaSumsPU")
+    @PersistenceContext(unitName = "EntwaSums696771PU")
     private EntityManager em;
 
     @Override

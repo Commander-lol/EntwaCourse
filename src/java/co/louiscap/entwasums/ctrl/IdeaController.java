@@ -31,10 +31,12 @@ package co.louiscap.entwasums.ctrl;
 
 import co.louiscap.entwasums.bus.IdeaService;
 import co.louiscap.entwasums.ents.Idea;
+import co.louiscap.entwasums.ents.Staff;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -46,10 +48,15 @@ public class IdeaController {
     
     private String ideaName;
     
-    private String ideaDesciption;
+    private String ideaDescription;
+    
+    private Staff firstStaff, secondStaff, thirdStaff;
     
     @EJB
     private IdeaService is;
+    
+    @Inject
+    UserManagerBean umb;
 
     /**
      * Creates a new instance of IdeaController
@@ -65,15 +72,25 @@ public class IdeaController {
         this.ideaName = ideaName;
     }
 
-    public String getIdeaDesciption() {
-        return ideaDesciption;
+    public String getIdeaDescription() {
+        return ideaDescription;
     }
 
-    public void setIdeaDesciption(String ideaDesciption) {
-        this.ideaDesciption = ideaDesciption;
+    public void setIdeaDescription(String ideaDescription) {
+        this.ideaDescription = ideaDescription;
     }    
     
     public List<Idea> getAvailableIdeas() {
         return is.getAvailableIdeas();
+    }
+    
+    public String newIdea() {
+        Idea i = new Idea();
+        i.setCreator(umb.getUser());
+        i.setTitle(ideaName);
+        i.setDescription(ideaDescription);
+        is.submitIdea(i);
+        System.out.println("oiansd");
+        return umb.getUserSlug() + "/index";
     }
 }

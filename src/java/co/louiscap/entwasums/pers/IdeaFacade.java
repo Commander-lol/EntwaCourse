@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.entwasums.pers;
 
 import co.louiscap.entwasums.ents.Idea;
+import co.louiscap.entwasums.ents.Interactor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -45,7 +46,7 @@ import javax.persistence.Query;
 @Stateless
 public class IdeaFacade extends AbstractFacade<Idea> {
 
-    @PersistenceContext(unitName = "EntwaSumsPU")
+    @PersistenceContext(unitName = "EntwaSums696771PU")
     private EntityManager em;
 
     @Override
@@ -57,6 +58,18 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         super(Idea.class);
     }
 
+    public List<Idea> getIdeasForUser(Interactor user) {
+        Query q = em.createQuery("SELECT i FROM Idea i WHERE i.creator = :user");
+        q.setParameter("user", user);
+        List<Idea> userIdeas;
+        try {
+            userIdeas = (List<Idea>)q.getResultList();
+        } catch (NoResultException nre) {
+            userIdeas = new ArrayList<>();
+        }
+        return userIdeas;
+    }
+    
     public List<Idea> getAvailableIdeas() {
         Query q = em.createQuery("SELECT i FROM Idea i WHERE i.implementor IS NULL");
         List<Idea> availableIdeas;
@@ -66,6 +79,5 @@ public class IdeaFacade extends AbstractFacade<Idea> {
             availableIdeas = new ArrayList<>();
         }
         return availableIdeas;
-    }
-    
+    }    
 }

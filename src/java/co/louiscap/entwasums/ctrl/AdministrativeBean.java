@@ -30,10 +30,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.entwasums.ctrl;
 
 import co.louiscap.entwasums.bus.UserManagerService;
+import co.louiscap.entwasums.bus.exceptions.AuthorisationException;
+import co.louiscap.entwasums.ents.Interactor;
 import co.louiscap.entwasums.ents.PendingUser;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
@@ -60,17 +65,44 @@ public class AdministrativeBean implements Serializable{
     }
     
     public List<PendingUser> getPendingUsers() {
-        return ums.getPendingUsers();
+        try {
+            return ums.getPendingUsers();
+        } catch (AuthorisationException ex) {
+            String message = ex.getMessage();
+            ex.printStackTrace(System.err);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+            return null;
+        }
+    }
+    
+    public List<Interactor> getUsers() {
+        try {
+            return ums.getAllUsers();
+        } catch (AuthorisationException ex) {
+            String message = ex.getMessage();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+        }
+        return new ArrayList<>();
     }
     
     public String acceptUser(PendingUser pu) {
         System.out.println("Accepted " + pu.getUsername());
+        try {
+            ums.createUserFromPending(pu);
+        } catch (AuthorisationException ex) {
+            String message = ex.getMessage();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+        }
         return null;
     }
     
     public String rejectUser(PendingUser pu) {
-        System.out.println("Rejected " + pu.getUsername());
+        ums.removePendingUser(pu);
         return null;
     }
     
+    public String deleteUser(Interactor i) {
+        ums.deleteUserAccount(i);
+        return null;
+    }
 }

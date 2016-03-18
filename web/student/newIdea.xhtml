@@ -10,17 +10,18 @@
     </head>
     <body>
         <ui:composition template="/templates/layout.xhtml">
+            <ui:define name="title">New Idea</ui:define>
             <ui:define name="body">
-                <h:form>
+                <h:form id="ideaForm">
                     <b:label text="Project Name"/>
                     <b:inputText id="pName" placeholder="Project Name" label="Idea Name" class="bf-required" binding="#{ideaController.ideaName}">
                     </b:inputText>
                     
                     <b:label text="Project Description"/>
-                    <b:inputTextarea placeholder="Project Description" label="Idea Name" class="bf-required">
+                    <b:inputTextarea placeholder="Project Description" label="Idea Name" class="bf-required" binding="#{ideaController.ideaDescription}">
                     </b:inputTextarea>
-                    
-                    <b:button value="Submit Idea" look="success"/>
+                        
+                    <b:commandButton value="Submit Idea" look="success" action="#{ideaController.newIdea}" ajax="true"/>
                 </h:form>
             </ui:define>
         </ui:composition>

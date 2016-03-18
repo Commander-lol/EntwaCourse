@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.ents;
 
+import co.louiscap.entwasums.ents.properties.AccessLevel;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -41,6 +42,11 @@ public class Student extends Interactor {
      */
     @OneToOne
     private Idea project;
+    
+    public Student() {
+        super();
+        this.setAccess(AccessLevel.STUDENT);
+    }
 
     public Idea getProject() {
         return project;

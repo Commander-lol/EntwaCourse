@@ -29,9 +29,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.bus;
 
+import co.louiscap.entwasums.bus.exceptions.AuthorisationException;
 import co.louiscap.entwasums.ctrl.UserManagerBean;
+import co.louiscap.entwasums.ents.Interactor;
+import co.louiscap.entwasums.ents.Organisation;
 import co.louiscap.entwasums.ents.PendingUser;
-import co.louiscap.entwasums.ents.properties.AccessLevel;
+import co.louiscap.entwasums.ents.Staff;
+import co.louiscap.entwasums.ents.Student;
 import co.louiscap.entwasums.pers.InteractorFacade;
 import co.louiscap.entwasums.pers.OrganisationFacade;
 import co.louiscap.entwasums.pers.PendingUserFacade;
@@ -60,12 +64,54 @@ public class UserManagerService {
     @EJB
     PendingUserFacade puf;
     
-    public List<PendingUser> getPendingUsers() {
-        if(!umb.isAccessLevel(AccessLevel.ADMIN)){
-            throw new AuthorisationException();
-        }
+    public List<PendingUser> getPendingUsers() throws AuthorisationException {
+//        if(!umb.isAccessLevel(AccessLevel.ADMIN)){
+//            throw new AuthorisationException();
+//        }
         return puf.getAllPendingUsers();
     }
     
-    public void createUserOfType
+    public List<Interactor> getAllUsers() throws AuthorisationException {
+        return inf.getAll();
+    }
+    
+    public void createUserFromPending(PendingUser pu) throws AuthorisationException {
+//        if(!umb.isAccessLevel(AccessLevel.ADMIN)) {
+//            throw new AuthorisationException();
+//        }
+        switch(pu.getRequestedAccess()) {
+            case STUDENT:
+                Student stu = new Student();
+                stu.setUsername(pu.getUsername());
+                stu.setPassword(pu.getPassword());
+                stu.setPreEncrypt(true);
+                studentf.create(stu);
+                break;
+            case STAFF:
+                Staff sta =  new Staff();
+                sta.setUsername(pu.getUsername());
+                sta.setPassword(pu.getPassword());
+                sta.setPreEncrypt(true);
+                stafff.create(sta);
+                break;
+            case ORGANISATION:
+                Organisation org = new Organisation();
+                org.setUsername(pu.getUsername());
+                org.setPassword(pu.getPassword());
+                org.setPreEncrypt(true);
+                of.create(org);
+                break;
+            default:
+                throw new AuthorisationException();
+        }
+        puf.remove(pu);
+    }
+    
+    public void removePendingUser(PendingUser pu) {
+        puf.remove(pu);
+    }
+    
+    public void deleteUserAccount(Interactor i) {
+        inf.remove(i);
+    }
 }

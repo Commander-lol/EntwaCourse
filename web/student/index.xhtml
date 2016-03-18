@@ -2,16 +2,40 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
         <ui:composition template="/templates/tabbedInterface.xhtml">
-<!--            <ui:define name="yourProjects">
-                <b:button look="info" value="New" tooltip="Create New Project" outcome="newIdea"></b:button>
-            </ui:define>
+            <ui:define name="title">Student</ui:define>
+            <ui:define name="tabs">
+                <b:tab title="Your Projects">
+                    <b:well>
+                    <b:button look="info" value="New" tooltip="Create New Project" outcome="newIdea"></b:button>
+                    <b:dataTable value="#{studentBean.studentIdeas}" var="idea" ajax="true">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Username" />
+                            </f:facet>
+                            <h:outputText value="#{idea.title}" />
+
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Controls" />
+                            </f:facet>
+                            <b:commandButton value="View" look="info"
+                                             action="#{ideaController.viewIdea(idea)}"
+                                             update="@form" ajax="true"/>
+                        </h:column>
+                    </b:dataTable>
+                    </b:well>
+                </b:tab>
+            </ui:define><!--
             <ui:define name="allProjects">
             </ui:define>
             <ui:define name="settings">

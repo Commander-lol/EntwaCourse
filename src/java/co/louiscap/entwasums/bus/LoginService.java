@@ -47,6 +47,9 @@ import javax.inject.Inject;
  */
 @Stateless
 public class LoginService {
+    
+    private static final String DEFAULT_AUTH_ERROR = "Invalid Username or Password";
+    
     @EJB
     private InteractorFacade inf;
     @EJB
@@ -55,16 +58,29 @@ public class LoginService {
     @Inject
     private UserManagerBean umb;
     
-    public Interactor login(String username, String password) throws AuthenticationException{
+    public Interactor login(String username, String password) throws AuthenticationException {
         Interactor i = inf.getByUsername(username);
         if(i == null) {
-            throw new AuthenticationException("Invalid Username or Password");
+            throw new AuthenticationException(false, DEFAULT_AUTH_ERROR);
         } else {
             if(Encrypt.VerifySHA256Hex(password, i.getPassword())) {
                 umb.setUser(i);
                 return i;
             } else {
-                throw new AuthenticationException("Invalid Username or Password");
+                throw new AuthenticationException(true, DEFAULT_AUTH_ERROR);
+            }
+        }
+    }
+    
+    public PendingUser loginAsPendingUser(String username, String password) throws AuthenticationException {
+        PendingUser pu = puf.getByUsername(username);
+        if(pu == null) {
+            throw new AuthenticationException(false, DEFAULT_AUTH_ERROR);
+        } else {
+            if(Encrypt.VerifySHA256Hex(password, pu.getPassword())) {
+                return pu;
+            } else {
+                throw new AuthenticationException(true, DEFAULT_AUTH_ERROR);
             }
         }
     }

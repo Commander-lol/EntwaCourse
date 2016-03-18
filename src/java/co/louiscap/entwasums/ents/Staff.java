@@ -29,6 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 package co.louiscap.entwasums.ents;
 
+import co.louiscap.entwasums.ents.properties.AccessLevel;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -48,6 +49,11 @@ public class Staff extends Interactor {
      */
     @OneToMany(mappedBy = "author")
     private List<Feedback> feedbacks;
+    
+    public Staff() {
+        super();
+        this.setAccess(AccessLevel.STUDENT);
+    }
     
     public List<Idea> getReviewIdeas() {
         return reviewIdeas;

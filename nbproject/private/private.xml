@@ -3,17 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/commander-lol/Programs/EntwaSums/web/student/browsePages.xhtml</file>
-            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/bus/StartupBean.java</file>
-            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/ctrl/UserManagerBean.java</file>
+            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/ctrl/IdeaController.java</file>
+            <file>file:/home/commander-lol/Programs/EntwaSums/web/student/index.xhtml</file>
+            <file>file:/home/commander-lol/Programs/EntwaSums/web/includes/allAvailableIdeas.xhtml</file>
+            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/ctrl/StudentBean.java</file>
             <file>file:/home/commander-lol/Programs/EntwaSums/web/student/newIdea.xhtml</file>
-            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/ents/Interactor.java</file>
             <file>file:/home/commander-lol/Programs/EntwaSums/web/index.xhtml</file>
-            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/ents/Administrator.java</file>
             <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/ctrl/LoginBean.java</file>
-            <file>file:/home/commander-lol/Programs/EntwaSums/web/Error.xhtml</file>
-            <file>file:/home/commander-lol/Programs/EntwaSums/web/Login.xhtml</file>
-            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/pers/AdministratorFacade.java</file>
+            <file>file:/home/commander-lol/Programs/EntwaSums/web/templates/tabbedInterface.xhtml</file>
+            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/pers/StudentFacade.java</file>
+            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/pers/IdeaFacade.java</file>
+            <file>file:/home/commander-lol/Programs/EntwaSums/src/java/co/louiscap/entwasums/bus/IdeaService.java</file>
         </group>
     </open-files>
 </project-private>

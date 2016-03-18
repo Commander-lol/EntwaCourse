@@ -24,11 +24,12 @@
         <b:navBar brand="SUMS" class="no-corner">
             <ui:insert name="pageCommands"></ui:insert>
             <b:navbarLinks pull="right">
-                <b:navCommandLink rendered="#{userManagerBean.loggedIn}" outcome="#{userManagerBean.logout()}"><b:iconAwesome name="user"/> Sign Out</b:navCommandLink>
+                <b:navCommandLink rendered="#{userManagerBean.loggedIn}" action="#{userManagerBean.logout}"><b:iconAwesome name="user"/> Sign Out</b:navCommandLink>
             </b:navbarLinks>
         </b:navBar>
         <b:container>
             <ui:insert name="body"></ui:insert>
+            <b:messages globalOnly="true"/>
         </b:container>
     </h:body>
 </html>

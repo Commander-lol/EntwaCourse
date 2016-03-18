@@ -36,8 +36,10 @@ public class AuthenticationException extends Exception {
 
     private static final long serialVersionUID = -2390955251377114942L;
 
-    public AuthenticationException(String reason) {
-        super(reason);
-    }
+    public final boolean badPassword;
     
+    public AuthenticationException(boolean badPassword, String reason) {
+        super(reason);
+        this.badPassword = badPassword;
+    }
 }

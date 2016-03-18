@@ -33,6 +33,7 @@ import co.louiscap.entwasums.bus.LoginService;
 import co.louiscap.entwasums.bus.exceptions.AuthenticationException;
 import co.louiscap.entwasums.bus.exceptions.UsernameExistsException;
 import co.louiscap.entwasums.ents.Interactor;
+import co.louiscap.entwasums.ents.PendingUser;
 import co.louiscap.entwasums.ents.properties.AccessLevel;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -216,10 +217,22 @@ public class LoginBean implements Serializable {
             System.out.println(controlPanel);
             return controlPanel;
         } catch (AuthenticationException ex) {
-            String message = ex.getMessage();
-            ex.printStackTrace(System.err);
-            FacesContext.getCurrentInstance().addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
-            return null;
+            if(ex.badPassword) {
+                String message = ex.getMessage();
+                ex.printStackTrace(System.err);
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sign In Error", message));
+                return null;
+            } else {
+                try {
+                    PendingUser pu = ls.loginAsPendingUser(username, password);
+                    return "/pending";
+                } catch(AuthenticationException ax) {
+                    String message = ex.getMessage();
+                    ex.printStackTrace(System.err);
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sign In Error", message));
+                    return null;
+                }
+            }
         }
     }
 
@@ -229,7 +242,7 @@ public class LoginBean implements Serializable {
         } catch (UsernameExistsException ex) {
             String message = ex.getMessage();
             ex.printStackTrace(System.err);
-            FacesContext.getCurrentInstance().addMessage("loginErrors", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Register Error", message));
             return null;
         }
         System.out.println("COMPLETE REGISTER");

@@ -10,6 +10,9 @@
         <ui:define name="title">Account</ui:define>
         
         <ui:define name="pageCommands">
+            <f:metadata>
+            <f:viewAction action="#{userManagerBean.logout()}"/>
+            </f:metadata>
             <b:navbarLinks pull="right">
                 <b:navCommandLink action="#{loginBean.setNewUser(false)}" update=":loginform" ajax="true" styleClass="clickable">Sign In</b:navCommandLink>
                 <b:navCommandLink action="#{loginBean.setNewUser(true)}" update=":loginform" ajax="true" styleClass="clickable">Register</b:navCommandLink>
@@ -31,7 +34,7 @@
 
                         <h:outputLabel for="password" value="Password:" styleClass="valign"/>
                         <b:inputText id="password" placeholder="password" type="password" 
-                                     tooltip="Must contain at least 6 characters" value="#{loginBean.password}">
+                                     tooltip="Must contain at least 6 characters"  tooltip-position="bottom" value="#{loginBean.password}">
                             <f:facet name="append">
                                 <b:iconAwesome name="lock" size="lg"/>
                             </f:facet>
@@ -41,7 +44,7 @@
                         <h:outputLabel for="confPassword" value="Confirm Password:" rendered="#{loginBean.newUser}" styleClass="valign"/>
                         <b:inputText
                             id="confPassword" placeholder="password" type="password" tooltip="Must match password"
-                            value="#{loginBean.passwordConf}" rendered="#{loginBean.newUser}">
+                              tooltip-position="bottom" value="#{loginBean.passwordConf}" rendered="#{loginBean.newUser}">
                             <f:facet name="append">
                                 <b:iconAwesome name="lock" size="lg"/>
                             </f:facet>
@@ -59,8 +62,13 @@
                     </b:panelGrid>
                    
                     <b:row>
+                        <b:messages globalOnly="true"/>
+                    </b:row>
+                    
+                    <b:row>
                         <b:column span="2" offset="2">
-                            <b:commandButton action="#{loginBean.attemptLogin}" value="#{loginBean.actionType}" ajax="true"/>
+                            <b:commandButton action="#{loginBean.attemptLogin}" value="#{loginBean.actionType}" ajax="true"
+                                             style="margin-top: -50px;"/>
                         </b:column>
                     </b:row>
                 </h:form>

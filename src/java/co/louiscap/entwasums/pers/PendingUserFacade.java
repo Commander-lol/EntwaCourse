@@ -45,7 +45,7 @@ import javax.persistence.Query;
 @Stateless
 public class PendingUserFacade extends AbstractFacade<PendingUser> {
     
-    @PersistenceContext(unitName = "EntwaSumsPU")
+    @PersistenceContext(unitName = "EntwaSums696771PU")
     private EntityManager em;
 
     @Override

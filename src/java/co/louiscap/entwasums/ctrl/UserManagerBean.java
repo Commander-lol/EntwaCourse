@@ -71,7 +71,14 @@ public class UserManagerBean implements Serializable {
         System.out.println("aosidnoinasd");
         return "/index";
     }
+    public String getUserSlug() {
+        return sessionUser != null ?
+                "/" + sessionUser.getAccess().name :
+                null;
+    }
     public boolean isAccessLevel(AccessLevel level) {
-        return sessionUser.getAccess().equals(level);
+        return sessionUser != null ? 
+                sessionUser.getAccess().is(level) :
+                false;
     }
 }

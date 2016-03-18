@@ -37,6 +37,7 @@ public class AuthorisationException extends Exception {
     private static final long serialVersionUID = -1512306065551791828L;
 
     public AuthorisationException() {
+        super("Lacking required authorisation for requested operation");
     }
     
 }

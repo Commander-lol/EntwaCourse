@@ -27,33 +27,37 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package co.louiscap.entwasums.bus;
+package co.louiscap.entwasums.ctrl;
 
+import co.louiscap.entwasums.bus.IdeaService;
 import co.louiscap.entwasums.ents.Idea;
-import co.louiscap.entwasums.ents.Interactor;
-import co.louiscap.entwasums.pers.IdeaFacade;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  *
  * @author Louis Capitanchik
  */
-@Stateless
-public class IdeaService {
+@Named(value = "studentBean")
+@RequestScoped
+public class StudentBean {
+    
+    @Inject
+    UserManagerBean umb;
+    
     @EJB
-    IdeaFacade idf;
-    
-    public List<Idea> getAvailableIdeas() {
-        return idf.getAvailableIdeas();
+    IdeaService is;
+
+    /**
+     * Creates a new instance of StudentBean
+     */
+    public StudentBean() {
     }
     
-    public List<Idea> getIdeasForUser(Interactor i) {
-        return idf.getIdeasForUser(i);
-    }
-    
-    public void submitIdea(Idea i) {
-        idf.create(i);
+    public List<Idea> getStudentIdeas() {
+        return is.getIdeasForUser(umb.getUser());
     }
 }

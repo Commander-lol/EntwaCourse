@@ -39,6 +39,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -67,6 +68,8 @@ public abstract class Interactor implements Serializable {
     private AccessLevel access = AccessLevel.STUDENT;
     
     private boolean accepted = false;
+    @Transient
+    private boolean preEncrypt = false;
     
     /**
      * A list of potential ideas created by this interactor; anybody who
@@ -131,6 +134,14 @@ public abstract class Interactor implements Serializable {
         this.ideas = ideas;
     }
 
+    public boolean isPreEncrypt() {
+        return preEncrypt;
+    }
+
+    public void setPreEncrypt(boolean preEncrypt) {
+        this.preEncrypt = preEncrypt;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

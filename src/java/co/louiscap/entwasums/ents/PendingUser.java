@@ -30,6 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.entwasums.ents;
 
 import co.louiscap.entwasums.ents.properties.AccessLevel;
+import co.louiscap.utils.Encrypt;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -93,7 +94,7 @@ public class PendingUser implements Serializable {
      * @param password new value of password
      */
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Encrypt.SHA256Hex(password);
     }
     
     /**

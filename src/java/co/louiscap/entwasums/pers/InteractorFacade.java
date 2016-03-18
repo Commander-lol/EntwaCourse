@@ -30,7 +30,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package co.louiscap.entwasums.pers;
 
 import co.louiscap.entwasums.ents.Interactor;
-import co.louiscap.utils.Encrypt;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -44,7 +45,7 @@ import javax.persistence.Query;
 @Stateless
 public class InteractorFacade extends AbstractFacade<Interactor> {
 
-    @PersistenceContext(unitName = "EntwaSumsPU")
+    @PersistenceContext(unitName = "EntwaSums696771PU")
     private EntityManager em;
 
     @Override
@@ -66,5 +67,16 @@ public class InteractorFacade extends AbstractFacade<Interactor> {
             i = null;
         }
         return i;
+    }
+    
+    public List<Interactor> getAll () {
+        Query q = em.createQuery("SELECT i FROM Interactor i WHERE 1=1");
+        List<Interactor> is;
+        try {
+            is = (List<Interactor>) q.getResultList();
+        } catch (NoResultException nre) {
+            is = new ArrayList<>();
+        }
+        return is;
     }
 }

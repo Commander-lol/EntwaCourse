@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <b:dataTable value="#{ideaController.availableIdeas}" var="idea" ajax="true">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Username" />
+            </f:facet>
+            <h:outputText value="#{idea.title}" />
+            
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="Controls" />
+            </f:facet>
+            <b:commandButton value="View" look="info"
+                             action="#{ideaController.viewIdea(idea)}"
+                             value=""update="@form" ajax="true"/>
+        </h:column>
+    </b:dataTable>
+</ui:composition>
